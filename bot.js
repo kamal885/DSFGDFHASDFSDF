@@ -1,63 +1,28 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-var prefix = "-";
 
 
-client.on("message", message => {
 
-            if (message.content.startsWith(prefix + "bc")) {
-                         if (!message.member.hasPermission("ADMINISTRATOR"))  return;
-  let args = message.content.split(" ").slice(1);
-  var argresult = args.join(' '); 
-  message.guild.members.filter(m => m.presence.status !== 'offline').forEach(m => {
- m.send(`${argresult}\n ${m}`);
-})
- message.channel.send(`\`${message.guild.members.filter(m => m.presence.status !== 'online').size}\` : عدد الاعضاء المستلمين`); 
- message.delete(); 
-};     
+client.on("ready", () => {
+console.log('By : Moshaks');
+client.user.setPresence({
+  status: 'dnd',
+  game: { 
+     type: 0,
+     name: 'Surprise Mother Fucker :) ',
+     details: `- Developer - Programmer`,
+     url: 'http://twitch.tv/M7md_Salih',
+     state: `إنسآن `,
+     application_id: '377479790195769345',
+     assets: {
+        small_image: `377480550207717376`,
+         small_text: ' Take This ! ' ,
+        large_image: `377480353259978752`,
+          large_text: `EGY FOREVER ♥` }
+
+  }
+    });
 });
 
-
-
-
-client.on('message', message => {
-var prefix = "-";
-
-    if (message.author.id === client.user.id) return;
-    if (message.guild) {
-   let embed = new Discord.RichEmbed()
-    let args = message.content.split(' ').slice(1).join(' ');
-if(message.content.split(' ')[0] == prefix + '+bc') {
-    if (!args[1]) {
-message.channel.send("**bc <message>**");
-return;
-}
-        message.guild.members.forEach(m => {
-   if(!message.member.hasPermission('ADMINISTRATOR')) return;
-            var bc = new Discord.RichEmbed()
-            .addField('» السيرفر :', `${message.guild.name}`)
-            .addField('» المرسل : ', `${message.author.username}#${message.author.discriminator}`)
-            .addField(' » الرسالة : ', args)
-            .setColor('#ff0000')
-            // m.send(`[${m}]`);
-            m.send(`${m}`,{embed: bc});
-        });
-    }
-    } else {
-        return;
-    }
-});
-
-
-
-
-
-
-
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag} !`);
-                client.user.setActivity("Gm|link",{type: 'WATCHING'});
-
-});
 
 client.login(process.env.BOT_TOKEN);
